@@ -78,7 +78,8 @@
     "motorsFrom": "Motor mulai"
   },
   "vehicles": {
-    "title": "Daftar Kendaraan",
+    "title": "Temukan Kendaraan Impianmu",
+    "subtitle": "Pilihan terbaik untuk setiap perjalanan Anda",
     "filterType": "Tipe Kendaraan",
     "filterBrand": "Merek",
     "filterTransmission": "Transmisi",

@@ -78,7 +78,8 @@
     "motorsFrom": "Motorcycles from"
   },
   "vehicles": {
-    "title": "All Vehicles",
+    "title": "Find Your Dream Ride",
+    "subtitle": "The best selection for your journey",
     "filterType": "Vehicle Type",
     "filterBrand": "Brand",
     "filterTransmission": "Transmission",

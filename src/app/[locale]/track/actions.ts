@@ -29,5 +29,14 @@ export async function trackBookingAction(data: TrackBookingData) {
   }
 
   // RPC usually returns an array, take the first one
-  return { data: booking[0] };
+  const foundBooking = booking[0];
+
+  // Fetch vehicle details
+  const { data: vehicle } = await supabase
+    .from("vehicles")
+    .select("*")
+    .eq("id", foundBooking.vehicle_id)
+    .single();
+
+  return { data: { ...foundBooking, vehicle } };
 }

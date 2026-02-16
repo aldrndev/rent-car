@@ -1,5 +1,5 @@
 import { createGroq } from "@ai-sdk/groq";
-import { type LanguageModel, streamText } from "ai";
+import { convertToModelMessages, type LanguageModel, streamText } from "ai";
 import { createClient } from "@/lib/supabase/server";
 
 const groq = createGroq({
@@ -57,7 +57,7 @@ Rules:
   const result = streamText({
     model: groq("llama-3.3-70b-versatile") as unknown as LanguageModel,
     system: systemPrompt,
-    messages,
+    messages: await convertToModelMessages(messages),
   });
 
   return result.toUIMessageStreamResponse();

@@ -14,6 +14,7 @@ import {
   Users,
   Zap,
 } from "lucide-react";
+import NextImage from "next/image";
 import {
   AnimateOnScroll,
   StaggerContainer,
@@ -43,79 +44,162 @@ export function LandingClient({ vehicles, t }: LandingClientProps) {
 
   return (
     <>
-      {/* ════════════════════ HERO ════════════════════ */}
-      <section className="relative overflow-hidden bg-linear-to-br from-background via-surface to-background px-4 pb-20 pt-24 md:pb-28 md:pt-32">
-        {/* Radial glows */}
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,var(--color-primary)_0%,transparent_50%)] opacity-10" />
-        <div className="absolute -right-40 -top-40 h-80 w-80 rounded-full bg-primary/5 blur-3xl" />
-        <div className="absolute -bottom-40 -left-40 h-80 w-80 rounded-full bg-secondary/5 blur-3xl" />
+      {/* ════════════════════ HERO (PREMIUM CORPORATE) ════════════════════ */}
+      <section className="relative overflow-hidden bg-linear-to-br from-white via-blue-50/30 to-white pt-32 pb-16 md:pt-40 md:pb-32 dark:from-background dark:via-primary/5 dark:to-background">
+        <div className="mx-auto max-w-7xl px-4">
+          <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-2 lg:gap-8">
+            {/* Left Column: Typography & CTA */}
+            <div className="flex flex-col items-center text-center lg:items-start lg:text-left">
+              <AnimateOnScroll delay={0} direction="right">
+                <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/5 px-4 py-1.5 text-sm font-medium text-primary backdrop-blur-sm">
+                  <span className="relative flex h-2 w-2">
+                    <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-primary opacity-75"></span>
+                    <span className="relative inline-flex h-2 w-2 rounded-full bg-primary"></span>
+                  </span>{" "}
+                  #1 Trusted Rental Service
+                </div>
+              </AnimateOnScroll>
 
-        <div className="relative mx-auto max-w-5xl text-center">
-          {/* Trust badge */}
-          <AnimateOnScroll delay={0} direction="none">
-            <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/10 px-4 py-1.5 text-sm font-medium text-primary">
-              <Star className="h-4 w-4 fill-current" />
-              <span>4.9/5 — 2000+ Reviews</span>
-            </div>
-          </AnimateOnScroll>
+              <AnimateOnScroll delay={0.1} direction="right">
+                <h1 className="mb-6 text-4xl font-extrabold leading-tight tracking-tight text-text md:text-5xl lg:text-6xl">
+                  {t.heroTitle}
+                </h1>
+              </AnimateOnScroll>
 
-          <AnimateOnScroll delay={0.1} direction="up">
-            <h1 className="mb-6 text-4xl font-extrabold leading-tight tracking-tight md:text-5xl lg:text-6xl">
-              {t.heroTitle}
-            </h1>
-          </AnimateOnScroll>
+              <AnimateOnScroll delay={0.2} direction="right">
+                <p className="mb-8 max-w-xl text-lg text-text-muted md:text-xl leading-relaxed">
+                  {t.heroSubtitle}
+                </p>
+              </AnimateOnScroll>
 
-          <AnimateOnScroll delay={0.2} direction="up">
-            <p className="mx-auto mb-10 max-w-2xl text-lg text-text-muted md:text-xl">
-              {t.heroSubtitle}
-            </p>
-          </AnimateOnScroll>
-
-          {/* Hero CTAs */}
-          <AnimateOnScroll delay={0.3} direction="up">
-            <div className="mb-12 flex flex-col items-center justify-center gap-4 sm:flex-row">
-              <Link
-                href="/vehicles"
-                className="group inline-flex items-center gap-2 rounded-xl bg-primary px-8 py-4 text-base font-bold text-white shadow-glow transition-all hover:bg-primary-hover hover:shadow-glow-lg"
+              <AnimateOnScroll
+                delay={0.3}
+                direction="right"
+                className="flex flex-col gap-4 sm:flex-row w-full sm:w-auto"
               >
-                {t.heroCta}
-                <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1" />
-              </Link>
-              <Link
-                href="/vehicles"
-                className="inline-flex items-center gap-2 rounded-xl border border-border bg-surface px-8 py-4 text-base font-semibold text-text transition-colors hover:border-primary/50 hover:bg-surface-hover"
-              >
-                <Search className="h-4 w-4" />
-                {t.heroCtaSecondary}
-              </Link>
-            </div>
-          </AnimateOnScroll>
+                <Link
+                  href="/vehicles"
+                  className="group inline-flex items-center justify-center gap-2 rounded-xl bg-primary px-8 py-4 text-base font-bold text-white shadow-lg shadow-primary/25 transition-all hover:bg-primary-hover hover:shadow-lg hover:shadow-primary/30 hover:-translate-y-0.5"
+                >
+                  {t.heroCta}
+                  <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1" />
+                </Link>
+                <Link
+                  href="/vehicles"
+                  className="inline-flex items-center justify-center gap-2 rounded-xl border border-border bg-white/50 px-8 py-4 text-base font-semibold text-text backdrop-blur-sm transition-all hover:bg-white hover:border-primary/50 dark:bg-white/5 dark:hover:bg-white/10"
+                >
+                  <Search className="h-4 w-4" />
+                  {t.heroCtaSecondary}
+                </Link>
+              </AnimateOnScroll>
 
-          {/* Price teasers */}
-          <AnimateOnScroll delay={0.4} direction="up">
-            <div className="flex flex-wrap items-center justify-center gap-4 text-sm text-text-muted">
-              {cheapestMotor && (
-                <span className="inline-flex items-center gap-2 rounded-lg border border-border bg-surface px-4 py-2">
-                  <Bike className="h-4 w-4 text-secondary" />
-                  {t.motorsFrom}{" "}
-                  <strong className="text-text">
-                    {formatRupiah(cheapestMotor)}
-                  </strong>
-                  {t.perDay}
-                </span>
-              )}
-              {cheapestCar && (
-                <span className="inline-flex items-center gap-2 rounded-lg border border-border bg-surface px-4 py-2">
-                  <Car className="h-4 w-4 text-primary" />
-                  {t.carsFrom}{" "}
-                  <strong className="text-text">
-                    {formatRupiah(cheapestCar)}
-                  </strong>
-                  {t.perDay}
-                </span>
-              )}
+              <AnimateOnScroll
+                delay={0.4}
+                direction="right"
+                className="mt-10 flex items-center gap-4 text-sm text-text-muted"
+              >
+                <div className="flex -space-x-3">
+                  {[
+                    "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=128&h=128&fit=crop&q=80",
+                    "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=128&h=128&fit=crop&q=80",
+                    "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=128&h=128&fit=crop&q=80",
+                    "https://images.unsplash.com/photo-1517841905240-472988babdf9?w=128&h=128&fit=crop&q=80",
+                  ].map((src, i) => (
+                    <div
+                      key={src}
+                      className="relative flex h-10 w-10 overflow-hidden rounded-full border-2 border-white bg-gray-200 dark:border-background"
+                    >
+                      <NextImage
+                        src={src}
+                        alt={`Customer ${i + 1}`}
+                        fill
+                        className="object-cover"
+                      />
+                    </div>
+                  ))}
+                  <div className="flex h-10 w-10 items-center justify-center rounded-full border-2 border-white bg-primary text-xs font-bold text-white dark:border-background">
+                    2k+
+                  </div>
+                </div>
+                <div>
+                  <div className="flex gap-1 text-yellow-400">
+                    <Star className="h-4 w-4 fill-current" />
+                    <Star className="h-4 w-4 fill-current" />
+                    <Star className="h-4 w-4 fill-current" />
+                    <Star className="h-4 w-4 fill-current" />
+                    <Star className="h-4 w-4 fill-current" />
+                  </div>
+                  <p className="font-medium">Trusted by 2,000+ Customers</p>
+                </div>
+              </AnimateOnScroll>
             </div>
-          </AnimateOnScroll>
+
+            {/* Right Column: Visual & Floating Cards */}
+            <div className="relative mt-12 lg:mt-0">
+              {/* Abstract Background Blotches */}
+              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-radial-gradient from-primary/10 to-transparent opacity-70 blur-3xl" />
+
+              <AnimateOnScroll
+                delay={0.2}
+                direction="left"
+                className="relative z-10"
+              >
+                {/* Main Vehicle Image - Replace with high-res cutout of Alphard/Fortuner */}
+                <div className="relative">
+                  <NextImage
+                    src="https://images.unsplash.com/photo-1617788138017-80ad40651399?q=80&w=2070&auto=format&fit=crop"
+                    alt="Premium Rental Car"
+                    width={800}
+                    height={600}
+                    className="w-full h-auto object-contain drop-shadow-2xl rounded-2xl"
+                    style={{
+                      maskImage:
+                        "linear-gradient(to bottom, black 80%, transparent 100%)",
+                    }}
+                    priority
+                  />
+
+                  {/* Floating Glass Card 1: Best Price */}
+                  <div className="absolute -left-4 top-10 animate-bounce-slow md:-left-12 md:top-20">
+                    <div className="flex items-center gap-3 rounded-2xl border border-white/20 bg-white/60 p-4 shadow-xl backdrop-blur-xl dark:bg-black/40 dark:border-white/10">
+                      <div className="flex h-12 w-12 items-center justify-center rounded-full bg-primary/10 text-primary">
+                        <CreditCard className="h-6 w-6" />
+                      </div>
+                      <div>
+                        <p className="text-xs font-medium text-text-muted">
+                          Starts from
+                        </p>
+                        <p className="text-lg font-bold text-text">
+                          {` IDR 300k`}
+                          <span className="text-xs font-normal text-text-muted">
+                            {" "}
+                            /day
+                          </span>
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Floating Glass Card 2: Availability */}
+                  <div className="absolute -right-4 bottom-10 animate-bounce-slow-delay md:-right-8 md:bottom-20">
+                    <div className="flex items-center gap-3 rounded-2xl border border-white/20 bg-white/60 p-4 shadow-xl backdrop-blur-xl dark:bg-black/40 dark:border-white/10">
+                      <div className="flex h-12 w-12 items-center justify-center rounded-full bg-green-500/10 text-green-500">
+                        <CheckCircle2 className="h-6 w-6" />
+                      </div>
+                      <div>
+                        <p className="text-xs font-medium text-text-muted">
+                          Status
+                        </p>
+                        <p className="text-lg font-bold text-text">
+                          Available Now
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </AnimateOnScroll>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -163,48 +247,108 @@ export function LandingClient({ vehicles, t }: LandingClientProps) {
           <StaggerItem>
             <Link
               href="/vehicles?type=car"
-              className="group flex flex-col rounded-2xl border border-border bg-surface p-8 transition-all hover:border-primary/50 hover:shadow-glow"
+              className="group relative flex h-64 flex-col justify-end overflow-hidden rounded-3xl border border-border bg-surface p-8 transition-all hover:shadow-lg"
             >
-              <div className="mb-4 flex h-16 w-16 items-center justify-center rounded-xl bg-primary/10 text-primary transition-transform group-hover:scale-110">
-                <Car className="h-8 w-8" />
+              <div className="absolute inset-0 transition-transform duration-700 group-hover:scale-105">
+                <NextImage
+                  src="https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?w=800&auto=format&fit=crop&q=80"
+                  alt="Car Rental"
+                  fill
+                  className="object-cover"
+                />
+                <div className="absolute inset-0 bg-linear-to-t from-black/90 via-black/40 to-transparent" />
               </div>
-              <h3 className="mb-1 text-2xl font-bold">
-                {t.car} ({carCount})
-              </h3>
-              <p className="mb-4 text-text-muted">SUV, MPV, Sedan & more</p>
-              {cheapestCar && (
-                <p className="text-sm text-text-muted">
-                  {t.carsFrom}{" "}
-                  <span className="font-bold text-primary">
-                    {formatRupiah(cheapestCar)}
-                  </span>
-                  {t.perDay}
+
+              <div className="relative z-10">
+                <div className="mb-2 flex items-center justify-between">
+                  <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-white/20 backdrop-blur-md text-white">
+                    <Car className="h-6 w-6" />
+                  </div>
+                  <div className="flex items-center gap-2 rounded-full bg-white/20 px-3 py-1 text-xs font-medium text-white backdrop-blur-md">
+                    <span className="relative flex h-2 w-2">
+                      <span className="relative inline-flex h-2 w-2 rounded-full bg-green-500"></span>
+                    </span>
+                    {carCount} Available
+                  </div>
+                </div>
+
+                <h3 className="mb-1 text-3xl font-bold text-white">{t.car}</h3>
+                <p className="mb-4 text-white/80 line-clamp-1">
+                  SUV, MPV, Sedan, Luxury & more
                 </p>
-              )}
+
+                <div className="flex items-center justify-between border-t border-white/20 pt-4">
+                  <div>
+                    <p className="text-xs text-white/60">{t.carsFrom}</p>
+                    {cheapestCar && (
+                      <p className="text-lg font-bold text-white">
+                        {formatRupiah(cheapestCar)}
+                        <span className="text-xs font-normal text-white/60">
+                          /{t.perDay}
+                        </span>
+                      </p>
+                    )}
+                  </div>
+                  <div className="flex h-10 w-10 items-center justify-center rounded-full bg-white text-primary transition-transform group-hover:translate-x-1">
+                    <ArrowRight className="h-5 w-5" />
+                  </div>
+                </div>
+              </div>
             </Link>
           </StaggerItem>
 
           <StaggerItem>
             <Link
               href="/vehicles?type=motorcycle"
-              className="group flex flex-col rounded-2xl border border-border bg-surface p-8 transition-all hover:border-secondary/50 hover:shadow-glow"
+              className="group relative flex h-64 flex-col justify-end overflow-hidden rounded-3xl border border-border bg-surface p-8 transition-all hover:shadow-lg"
             >
-              <div className="mb-4 flex h-16 w-16 items-center justify-center rounded-xl bg-secondary/10 text-secondary transition-transform group-hover:scale-110">
-                <Bike className="h-8 w-8" />
+              <div className="absolute inset-0 transition-transform duration-700 group-hover:scale-105">
+                <NextImage
+                  src="https://images.unsplash.com/photo-1558981403-c5f9899a28bc?w=800&auto=format&fit=crop&q=80"
+                  alt="Motorcycle Rental"
+                  fill
+                  className="object-cover"
+                />
+                <div className="absolute inset-0 bg-linear-to-t from-black/90 via-black/40 to-transparent" />
               </div>
-              <h3 className="mb-1 text-2xl font-bold">
-                {t.motorcycle} ({motorCount})
-              </h3>
-              <p className="mb-4 text-text-muted">Matic, Sport, Trail</p>
-              {cheapestMotor && (
-                <p className="text-sm text-text-muted">
-                  {t.motorsFrom}{" "}
-                  <span className="font-bold text-secondary">
-                    {formatRupiah(cheapestMotor)}
-                  </span>
-                  {t.perDay}
+
+              <div className="relative z-10">
+                <div className="mb-2 flex items-center justify-between">
+                  <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-white/20 backdrop-blur-md text-white">
+                    <Bike className="h-6 w-6" />
+                  </div>
+                  <div className="flex items-center gap-2 rounded-full bg-white/20 px-3 py-1 text-xs font-medium text-white backdrop-blur-md">
+                    <span className="relative flex h-2 w-2">
+                      <span className="relative inline-flex h-2 w-2 rounded-full bg-green-500"></span>
+                    </span>
+                    {motorCount} Available
+                  </div>
+                </div>
+
+                <h3 className="mb-1 text-3xl font-bold text-white">
+                  {t.motorcycle}
+                </h3>
+                <p className="mb-4 text-white/80 line-clamp-1">
+                  Matic, Sport, Trail, Classic
                 </p>
-              )}
+
+                <div className="flex items-center justify-between border-t border-white/20 pt-4">
+                  <div>
+                    <p className="text-xs text-white/60">{t.motorsFrom}</p>
+                    {cheapestMotor && (
+                      <p className="text-lg font-bold text-white">
+                        {formatRupiah(cheapestMotor)}
+                        <span className="text-xs font-normal text-white/60">
+                          /{t.perDay}
+                        </span>
+                      </p>
+                    )}
+                  </div>
+                  <div className="flex h-10 w-10 items-center justify-center rounded-full bg-white text-secondary transition-transform group-hover:translate-x-1">
+                    <ArrowRight className="h-5 w-5" />
+                  </div>
+                </div>
+              </div>
             </Link>
           </StaggerItem>
         </StaggerContainer>

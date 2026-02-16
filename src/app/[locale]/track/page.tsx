@@ -14,7 +14,7 @@ export default async function TrackPage() {
 
   return (
     <div className="flex min-h-screen flex-col bg-background">
-      <main className="flex-1 px-4 py-12">
+      <main className="flex-1 px-4 pt-32 pb-12">
         <div className="mx-auto max-w-7xl text-center">
           <h1 className="mb-4 text-3xl font-bold">{t("title")}</h1>
           <p className="mb-12 text-text-muted">{t("subtitle")}</p>

@@ -41,11 +41,16 @@ export function VehicleListClient({ vehicles }: Props) {
   return (
     <main className="min-h-screen bg-background">
       {/* Header */}
-      <section className="border-b border-border bg-surface/50 px-4 py-12">
+      <section className="border-b border-border bg-surface/50 px-4 pb-12 pt-32">
         <div className="mx-auto max-w-7xl">
-          <h1 className="mb-2 text-3xl font-bold">{t("vehicles.title")}</h1>
-          <p className="text-text-muted">
-            {vehicles.length} {t("common.vehicles").toLowerCase()}
+          <h1 className="mb-2 text-4xl font-extrabold tracking-tight md:text-5xl">
+            {t("vehicles.title")}
+          </h1>
+          <p className="text-lg text-text-muted">
+            {t("vehicles.subtitle")} &mdash;{" "}
+            <span className="font-medium text-primary">
+              {vehicles.length} {t("vehicles.available")}
+            </span>
           </p>
         </div>
       </section>
