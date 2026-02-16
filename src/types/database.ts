@@ -1,5 +1,25 @@
 /** Supabase Database type definitions */
 
+export type UserRole = "customer" | "admin";
+export type VehicleType = "car" | "motorcycle";
+export type TransmissionType = "manual" | "automatic";
+export type BookingStatus =
+  | "pending"
+  | "awaiting_payment"
+  | "paid"
+  | "confirmed"
+  | "active"
+  | "completed"
+  | "cancelled";
+export type PaymentStatus =
+  | "pending"
+  | "settlement"
+  | "expire"
+  | "cancel"
+  | "deny"
+  | "refund";
+export type ChatRole = "user" | "assistant";
+
 export interface Database {
   public: {
     Tables: {
@@ -8,7 +28,7 @@ export interface Database {
           id: string;
           full_name: string;
           phone: string | null;
-          role: "customer" | "admin";
+          role: UserRole;
           created_at: string;
           updated_at: string;
         };
@@ -16,7 +36,7 @@ export interface Database {
           id: string;
           full_name: string;
           phone?: string | null;
-          role?: "customer" | "admin";
+          role?: UserRole;
           created_at?: string;
           updated_at?: string;
         };
@@ -24,7 +44,7 @@ export interface Database {
           id?: string;
           full_name?: string;
           phone?: string | null;
-          role?: "customer" | "admin";
+          role?: UserRole;
           created_at?: string;
           updated_at?: string;
         };
@@ -33,7 +53,7 @@ export interface Database {
         Row: {
           id: string;
           name: string;
-          type: "car" | "motorcycle";
+          type: VehicleType;
           brand: string;
           model: string;
           year: number;
@@ -43,7 +63,7 @@ export interface Database {
           images: string[];
           is_available: boolean;
           features: string[];
-          transmission: "manual" | "automatic";
+          transmission: TransmissionType;
           seats: number | null;
           engine_cc: number | null;
           created_at: string;
@@ -52,7 +72,7 @@ export interface Database {
         Insert: {
           id?: string;
           name: string;
-          type: "car" | "motorcycle";
+          type: VehicleType;
           brand: string;
           model: string;
           year: number;
@@ -62,7 +82,7 @@ export interface Database {
           images?: string[];
           is_available?: boolean;
           features?: string[];
-          transmission: "manual" | "automatic";
+          transmission: TransmissionType;
           seats?: number | null;
           engine_cc?: number | null;
           created_at?: string;
@@ -71,7 +91,7 @@ export interface Database {
         Update: {
           id?: string;
           name?: string;
-          type?: "car" | "motorcycle";
+          type?: VehicleType;
           brand?: string;
           model?: string;
           year?: number;
@@ -81,7 +101,7 @@ export interface Database {
           images?: string[];
           is_available?: boolean;
           features?: string[];
-          transmission?: "manual" | "automatic";
+          transmission?: TransmissionType;
           seats?: number | null;
           engine_cc?: number | null;
           created_at?: string;
@@ -103,14 +123,7 @@ export interface Database {
           total_price: number;
           discount_amount: number;
           final_price: number;
-          status:
-            | "pending"
-            | "awaiting_payment"
-            | "paid"
-            | "confirmed"
-            | "active"
-            | "completed"
-            | "cancelled";
+          status: BookingStatus;
           pickup_location: string | null;
           delivery_location: string | null;
           notes: string | null;
@@ -132,14 +145,7 @@ export interface Database {
           total_price: number;
           discount_amount?: number;
           final_price: number;
-          status?:
-            | "pending"
-            | "awaiting_payment"
-            | "paid"
-            | "confirmed"
-            | "active"
-            | "completed"
-            | "cancelled";
+          status?: BookingStatus;
           pickup_location?: string | null;
           delivery_location?: string | null;
           notes?: string | null;
@@ -161,14 +167,7 @@ export interface Database {
           total_price?: number;
           discount_amount?: number;
           final_price?: number;
-          status?:
-            | "pending"
-            | "awaiting_payment"
-            | "paid"
-            | "confirmed"
-            | "active"
-            | "completed"
-            | "cancelled";
+          status?: BookingStatus;
           pickup_location?: string | null;
           delivery_location?: string | null;
           notes?: string | null;
@@ -185,13 +184,7 @@ export interface Database {
           midtrans_order_id: string | null;
           payment_type: string | null;
           amount: number;
-          status:
-            | "pending"
-            | "settlement"
-            | "expire"
-            | "cancel"
-            | "deny"
-            | "refund";
+          status: PaymentStatus;
           snap_token: string | null;
           raw_response: Record<string, unknown> | null;
           created_at: string;
@@ -204,13 +197,7 @@ export interface Database {
           midtrans_order_id?: string | null;
           payment_type?: string | null;
           amount: number;
-          status?:
-            | "pending"
-            | "settlement"
-            | "expire"
-            | "cancel"
-            | "deny"
-            | "refund";
+          status?: PaymentStatus;
           snap_token?: string | null;
           raw_response?: Record<string, unknown> | null;
           created_at?: string;
@@ -223,13 +210,7 @@ export interface Database {
           midtrans_order_id?: string | null;
           payment_type?: string | null;
           amount?: number;
-          status?:
-            | "pending"
-            | "settlement"
-            | "expire"
-            | "cancel"
-            | "deny"
-            | "refund";
+          status?: PaymentStatus;
           snap_token?: string | null;
           raw_response?: Record<string, unknown> | null;
           created_at?: string;
@@ -284,21 +265,21 @@ export interface Database {
         Row: {
           id: string;
           session_id: string;
-          role: "user" | "assistant";
+          role: ChatRole;
           content: string;
           created_at: string;
         };
         Insert: {
           id?: string;
           session_id: string;
-          role: "user" | "assistant";
+          role: ChatRole;
           content: string;
           created_at?: string;
         };
         Update: {
           id?: string;
           session_id?: string;
-          role?: "user" | "assistant";
+          role?: ChatRole;
           content?: string;
           created_at?: string;
         };

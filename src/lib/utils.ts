@@ -1,12 +1,23 @@
 import { type ClassValue, clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
 
-/** Merge Tailwind class names (for shadcn/ui) */
+/**
+ * Merges Tailwind classes conditionally.
+ * Combines `clsx` for conditional logic and `tailwind-merge` to resolve conflicts.
+ *
+ * @param inputs - Class names or conditional class objects.
+ * @returns Merged class string.
+ */
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 
-/** Format IDR currency */
+/**
+ * Formats a number as Indonesian Rupiah (IDR).
+ *
+ * @param amount - The numeric amount to format.
+ * @returns Formatted currency string (e.g., "Rp 150.000").
+ */
 export function formatCurrency(amount: number): string {
   return new Intl.NumberFormat("id-ID", {
     style: "currency",
@@ -16,7 +27,11 @@ export function formatCurrency(amount: number): string {
   }).format(amount);
 }
 
-/** Generate human-readable order ID: ORD-XXXXXX */
+/**
+ * Generates a human-readable order ID (e.g., ORD-ABC123XYZ).
+ *
+ * @returns Unique order ID string starting with "ORD-".
+ */
 export function generateOrderId(): string {
   const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
   let result = "ORD-";
@@ -26,7 +41,13 @@ export function generateOrderId(): string {
   return result;
 }
 
-/** Format date to locale string */
+/**
+ * Formats a date string or Date object into a localized string.
+ *
+ * @param date - The date to format.
+ * @param locale - The locale to use (default: "id-ID").
+ * @returns Formatted date string (e.g., "1 Januari 2024").
+ */
 export function formatDate(date: Date | string, locale = "id-ID"): string {
   return new Date(date).toLocaleDateString(locale, {
     day: "numeric",

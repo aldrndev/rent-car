@@ -1,24 +1,22 @@
 import { z } from "zod";
 
 export const vehicleSchema = z.object({
-  name: z.string().min(1, "Nama kendaraan wajib diisi"),
+  name: z.string().min(1, "Name is required"),
   type: z.enum(["car", "motorcycle"]),
-  brand: z.string().min(1, "Merek wajib diisi"),
-  model: z.string().min(1, "Model wajib diisi"),
-  year: z
+  brand: z.string().min(1, "Brand is required"),
+  model: z.string().min(1, "Model is required"),
+  year: z.coerce
     .number()
-    .int()
-    .min(2000)
+    .min(1900)
     .max(new Date().getFullYear() + 1),
-  price_per_day: z.number().int().positive("Harga harus lebih dari 0"),
+  price_per_day: z.coerce.number().min(0, "Price must be positive"),
   description: z.string().optional(),
   image_url: z.string().url().optional().or(z.literal("")),
-  images: z.array(z.string().url()).default([]),
   is_available: z.boolean().default(true),
-  features: z.array(z.string()).default([]),
   transmission: z.enum(["manual", "automatic"]),
-  seats: z.number().int().positive().nullable().optional(),
-  engine_cc: z.number().int().positive().nullable().optional(),
+  seats: z.coerce.number().optional(),
+  engine_cc: z.coerce.number().optional(),
+  features: z.array(z.string()).default([]),
 });
 
 export type VehicleFormData = z.infer<typeof vehicleSchema>;

@@ -1,14 +1,15 @@
 "use client";
 
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { type ReactNode, useState } from "react";
+import { useState } from "react";
+import { ThemeProvider } from "@/components/providers/theme-provider";
 
-interface ProvidersProps {
-  children: ReactNode;
-}
+// ProvidersProps removed as it is now inline
 
-/** App-wide client providers: React Query */
-export function Providers({ children }: ProvidersProps) {
+/** App-wide client providers: React Query + Theme */
+export function Providers({
+  children,
+}: Readonly<{ children: React.ReactNode }>) {
   const [queryClient] = useState(
     () =>
       new QueryClient({
@@ -22,6 +23,8 @@ export function Providers({ children }: ProvidersProps) {
   );
 
   return (
-    <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
+    <ThemeProvider>
+      <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
+    </ThemeProvider>
   );
 }

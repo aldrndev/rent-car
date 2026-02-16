@@ -1,5 +1,6 @@
 @import "tailwindcss";
 
+/* biome-ignore lint/suspicious/noUnknownAtRules: Tailwind v4 theme */
 @theme {
   /* Colors - Dark premium palette */
   --color-primary: #6366f1;
@@ -115,28 +116,31 @@ body {
   outline-offset: 2px;
 }
 
-/* Reduced motion */
+/* reduced motion */
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
   *::after {
+    /* biome-ignore lint/complexity/noImportantStyles: required for accessibility override */
     animation-duration: 0.01ms !important;
+    /* biome-ignore lint/complexity/noImportantStyles: required for accessibility override */
     animation-iteration-count: 1 !important;
+    /* biome-ignore lint/complexity/noImportantStyles: required for accessibility override */
     transition-duration: 0.01ms !important;
   }
 }
 
-/* Light mode overrides */
-@media (prefers-color-scheme: light) {
-  :root {
-    --color-background: #f8fafc;
-    --color-surface: #ffffff;
-    --color-surface-hover: #f1f5f9;
-    --color-surface-elevated: #ffffff;
-    --color-text: #0f172a;
-    --color-text-muted: #64748b;
-    --color-text-inverse: #f1f5f9;
-    --color-border: #e2e8f0;
-    --color-border-hover: #cbd5e1;
-  }
+/* Light mode overrides — toggled via data-theme attribute */
+:root[data-theme="light"] {
+  --color-background: #f8fafc;
+  --color-surface: #ffffff;
+  --color-surface-hover: #f1f5f9;
+  --color-surface-elevated: #ffffff;
+  --color-text: #0f172a;
+  --color-text-muted: #64748b;
+  --color-text-inverse: #f1f5f9;
+  --color-border: #e2e8f0;
+  --color-border-hover: #cbd5e1;
+  --shadow-glow: 0 0 20px rgba(99, 102, 241, 0.1);
+  --shadow-glow-lg: 0 0 40px rgba(99, 102, 241, 0.12);
 }
