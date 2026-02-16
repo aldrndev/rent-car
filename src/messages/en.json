@@ -33,7 +33,9 @@
     "automatic": "Automatic",
     "backToHome": "Back to Home",
     "optional": "optional",
-    "or": "or"
+    "or": "or",
+    "browseVehicles": "Browse Vehicles",
+    "viewDetails": "View Details"
   },
   "landing": {
     "heroTitle": "#1 Car & Motorcycle Rental in Your City",
@@ -131,7 +133,9 @@
     "authModalTitle": "Log in to Save!",
     "authModalSubtitle": "Register as a member now and get IDR 50.000 discount on your first booking.",
     "loginOrRegister": "Login / Register",
-    "continueAsGuest": "Continue as Guest"
+    "continueAsGuest": "Continue as Guest",
+    "noBookings": "No Bookings Yet",
+    "noBookingsDesc": "You haven't made any bookings yet. Start exploring our vehicles and make your first booking!"
   },
   "track": {
     "title": "Track Booking",

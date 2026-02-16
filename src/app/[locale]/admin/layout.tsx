@@ -1,5 +1,4 @@
 import { redirect } from "next/navigation";
-import { getTranslations } from "next-intl/server";
 import { AdminSidebar } from "@/components/admin/admin-sidebar";
 import { createClient } from "@/lib/supabase/server";
 

@@ -1,18 +1,37 @@
 import { AdminBookingTable } from "@/components/admin/bookings/booking-table";
 import { createClient } from "@/lib/supabase/server";
 
-export default async function AdminBookingsPage() {
+interface AdminBookingsPageProps {
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
+}
+
+export default async function AdminBookingsPage({
+  searchParams,
+}: AdminBookingsPageProps) {
   const supabase = await createClient();
+  const PAGE_SIZE = 10;
+  const { page } = await searchParams;
+  const currentPage = Number(page) || 1;
+
+  // Calculate range for pagination
+  const from = (currentPage - 1) * PAGE_SIZE;
+  const to = from + PAGE_SIZE - 1;
 
   // Fetch bookings with related data
-  const { data: bookings } = await supabase
+  const { data: bookings, count } = await supabase
     .from("bookings")
-    .select(`
+    .select(
+      `
       *,
       vehicle:vehicles(name, image_url),
       user:profiles(full_name, email)
-    `)
-    .order("created_at", { ascending: false });
+    `,
+      { count: "exact" },
+    )
+    .order("created_at", { ascending: false })
+    .range(from, to);
+
+  const totalPages = count ? Math.ceil(count / PAGE_SIZE) : 1;
 
   // Transform data to match component interface
   const formattedBookings =
@@ -33,7 +52,11 @@ export default async function AdminBookingsPage() {
         </div>
       </div>
 
-      <AdminBookingTable bookings={formattedBookings} />
+      <AdminBookingTable
+        bookings={formattedBookings}
+        currentPage={currentPage}
+        totalPages={totalPages}
+      />
     </div>
   );
 }

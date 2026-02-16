@@ -49,10 +49,18 @@ export function ThemeProvider({ children }: Readonly<ThemeProviderProps>) {
     setMounted(true);
   }, []);
 
-  // Apply data-theme attribute to <html>
+  // Apply data-theme attribute and class to <html>
   useEffect(() => {
     if (!mounted) return;
-    document.documentElement.dataset.theme = theme;
+    const root = document.documentElement;
+    root.dataset.theme = theme;
+
+    if (theme === "dark") {
+      root.classList.add("dark");
+    } else {
+      root.classList.remove("dark");
+    }
+
     localStorage.setItem(STORAGE_KEY, theme);
   }, [theme, mounted]);
 

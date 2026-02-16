@@ -33,7 +33,9 @@
     "automatic": "Otomatis",
     "backToHome": "Kembali ke Beranda",
     "optional": "opsional",
-    "or": "atau"
+    "or": "atau",
+    "browseVehicles": "Lihat Kendaraan",
+    "viewDetails": "Lihat Detail"
   },
   "landing": {
     "heroTitle": "Rental Mobil & Motor #1 di Kota Anda",
@@ -131,7 +133,9 @@
     "authModalTitle": "Masuk untuk Hemat!",
     "authModalSubtitle": "Daftar member sekarang dan dapatkan diskon Rp 50.000 untuk booking pertama.",
     "loginOrRegister": "Masuk / Daftar",
-    "continueAsGuest": "Lanjut sebagai Tamu"
+    "continueAsGuest": "Lanjut sebagai Tamu",
+    "noBookings": "Belum Ada Booking",
+    "noBookingsDesc": "Anda belum membuat booking apapun. Mulai jelajahi kendaraan kami dan buat booking pertama Anda!"
   },
   "track": {
     "title": "Lacak Booking",

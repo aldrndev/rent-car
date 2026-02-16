@@ -33,6 +33,10 @@ export function NavbarClient({ user }: Readonly<NavbarClientProps>) {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const { theme, toggleTheme } = useTheme();
 
+  if (pathname.startsWith("/admin")) {
+    return null;
+  }
+
   const navLinks = [
     { href: "/vehicles", label: t("common.vehicles"), icon: Car },
     { href: "/track", label: t("common.trackBooking"), icon: MapPin },
@@ -83,17 +87,19 @@ export function NavbarClient({ user }: Readonly<NavbarClientProps>) {
 
           {user ? (
             <>
-              {/* My Bookings */}
-              <Link
-                href="/my-bookings"
-                className={`flex items-center gap-2 rounded-lg px-3 py-2 text-sm transition-colors ${
-                  isActive("/my-bookings")
-                    ? "bg-primary/10 text-primary"
-                    : "text-text-muted hover:bg-surface-hover hover:text-text"
-                }`}
-              >
-                {t("common.myBookings")}
-              </Link>
+              {/* My Bookings - Only for customers */}
+              {user.role !== "admin" && (
+                <Link
+                  href="/my-bookings"
+                  className={`flex items-center gap-2 rounded-lg px-3 py-2 text-sm transition-colors ${
+                    isActive("/my-bookings")
+                      ? "bg-primary/10 text-primary"
+                      : "text-text-muted hover:bg-surface-hover hover:text-text"
+                  }`}
+                >
+                  {t("common.myBookings")}
+                </Link>
+              )}
 
               {/* Admin Link */}
               {user.role === "admin" && (
@@ -220,14 +226,16 @@ export function NavbarClient({ user }: Readonly<NavbarClientProps>) {
 
             {user ? (
               <>
-                <Link
-                  href="/my-bookings"
-                  onClick={() => setMobileOpen(false)}
-                  className="flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm text-text-muted transition-colors hover:bg-surface-hover"
-                >
-                  <User className="h-4 w-4" />
-                  {t("common.myBookings")}
-                </Link>
+                {user.role !== "admin" && (
+                  <Link
+                    href="/my-bookings"
+                    onClick={() => setMobileOpen(false)}
+                    className="flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm text-text-muted transition-colors hover:bg-surface-hover"
+                  >
+                    <User className="h-4 w-4" />
+                    {t("common.myBookings")}
+                  </Link>
+                )}
 
                 {user.role === "admin" && (
                   <Link

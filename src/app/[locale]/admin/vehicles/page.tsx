@@ -1,16 +1,30 @@
-import { Plus } from "lucide-react";
-import { getTranslations } from "next-intl/server";
 import { AdminVehicleTable } from "@/components/admin/vehicles/vehicle-table";
 import { Link } from "@/i18n/navigation";
-import { createClient, createClient } from "@/lib/supabase/server";
+import { createClient } from "@/lib/supabase/server";
 
-export default async function AdminVehiclesPage() {
+interface AdminVehiclesPageProps {
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
+}
+
+export default async function AdminVehiclesPage({
+  searchParams,
+}: AdminVehiclesPageProps) {
   const supabase = await createClient();
+  const PAGE_SIZE = 10;
+  const { page } = await searchParams;
+  const currentPage = Number(page) || 1;
 
-  const { data: vehicles } = await supabase
+  // Calculate range for pagination
+  const from = (currentPage - 1) * PAGE_SIZE;
+  const to = from + PAGE_SIZE - 1;
+
+  const { data: vehicles, count } = await supabase
     .from("vehicles")
-    .select("*")
-    .order("created_at", { ascending: false });
+    .select("*", { count: "exact" })
+    .order("created_at", { ascending: false })
+    .range(from, to);
+
+  const totalPages = count ? Math.ceil(count / PAGE_SIZE) : 1;
 
   return (
     <div className="space-y-6">
@@ -27,7 +41,11 @@ export default async function AdminVehiclesPage() {
         </Link>
       </div>
 
-      <AdminVehicleTable vehicles={vehicles || []} />
+      <AdminVehicleTable
+        vehicles={vehicles || []}
+        currentPage={currentPage}
+        totalPages={totalPages}
+      />
     </div>
   );
 }

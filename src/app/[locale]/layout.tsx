@@ -1,6 +1,7 @@
 import { notFound } from "next/navigation";
 import { hasLocale, NextIntlClientProvider } from "next-intl";
 import { getMessages, setRequestLocale } from "next-intl/server";
+import { ChatWidget } from "@/components/chat/chat-widget";
 import { Navbar } from "@/components/layout/navbar";
 import { Providers } from "@/components/providers";
 import { routing } from "@/i18n/routing";
@@ -30,6 +31,7 @@ export default async function LocaleLayout({
       <Providers>
         <Navbar />
         {children}
+        <ChatWidget />
       </Providers>
     </NextIntlClientProvider>
   );

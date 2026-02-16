@@ -29,6 +29,7 @@ const adminLinks = [
     href: "/admin/bookings",
     label: "Bookings",
     icon: CreditCard,
+    exact: false,
   },
   {
     href: "/admin/promos",
@@ -49,8 +50,9 @@ export function AdminSidebar() {
     <aside className="fixed left-0 top-0 z-40 h-screen w-64 border-r border-border bg-surface transition-transform max-md:-translate-x-full">
       <div className="flex h-16 items-center border-b border-border px-6">
         <Link href="/" className="flex items-center gap-2 font-bold text-xl">
-          <span className="text-primary">Renta</span>
-          Go
+          <span>
+            <span className="text-primary">Renta</span>Go
+          </span>
           <span className="rounded bg-primary/10 px-1.5 py-0.5 text-xs text-primary">
             Admin
           </span>

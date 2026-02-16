@@ -5,7 +5,6 @@ import {
   TrendingUp,
   Users,
 } from "lucide-react";
-import { getTranslations } from "next-intl/server";
 import { formatRupiah } from "@/lib/format";
 import { createClient } from "@/lib/supabase/server";
 
